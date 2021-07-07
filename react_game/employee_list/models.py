@@ -11,8 +11,11 @@ class Employee(models.Model):
         ('sales', 'Sales'),
     )
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
                                 related_name='employees') #User will only see the employee that they have created.
     name = models.CharField(max_length=100)
     department = models.CharField(max_length=20, choices=DEPARTMENT_CHOICES)
     salary = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name

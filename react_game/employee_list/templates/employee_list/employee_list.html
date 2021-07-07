@@ -1,0 +1,14 @@
+{% extends 'employee_list/base.html' %}
+
+{% block title %}Employee List{% endblock title %}
+
+{% block content %}
+    <h1>Hello World</h1>
+    <!-- Start for the react stuff-->
+    <div id="js-framework-home"></div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js-bundle.js' %}"></script>
+{% endblock scripts %}
+

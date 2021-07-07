@@ -1,0 +1,17 @@
+{% extends 'tic_tac_toe/base.html' %}
+{% load static %}
+
+{% block title %}Play Tic Tac Toe{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'tic_tac_toe/css/tictactoe.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <h1>Hello Let's play tic tac toe</h1>
+    <div id="root"></div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'ticTacToeApp-bundle.js' %}"></script>
+{% endblock scripts %}

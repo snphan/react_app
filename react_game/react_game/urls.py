@@ -16,10 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from rest_framework import routers
+from todoBackend.views import TodoView
+
+# Routing registration for API
+router = routers.DefaultRouter()
+router.register(r'todos', TodoView, 'todo')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name="hello_webpack.html")),
     path('employee-list/', include('employee_list.urls')),
     path('tic-tac-toe/', include('tic_tac_toe.urls')),
     path('todo/', include('todo.urls')),
+    path('api/', include(router.urls)),
 ]

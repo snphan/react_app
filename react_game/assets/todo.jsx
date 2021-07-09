@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
+
 const todoItems = [
   {
     id: 1,
@@ -94,7 +95,7 @@ class App extends React.Component {
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="mb-4">
-                <button className="btn btn-primary">
+                <button className="btn btn-primary mb-2">
                   Add task
                 </button>
                 {this.renderTabList()}

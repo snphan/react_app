@@ -1,42 +1,95 @@
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import Modal from "./components/Modal";
+
+axios.defaults.xsrfHeaderName = "X-CSRFToken"; // So that post requests don't get rejected
 
 
-const todoItems = [
-  {
-    id: 1,
-    title: "Go to Market",
-    description: "Buy ingredients to prepare dinner",
-    completed: true,
-  },
-  {
-    id: 2,
-    title: "Sutdy",
-    description: "Read Algebra and history textbook for the upcoming test",
-    completed: false,
-  },
-  {
-    id: 3,
-    title: "Sammy's books",
-    description: "Go to library to return Sammy's books",
-    completed: true,
-  },
-  {
-    id: 4,
-    title: "Article",
-    description: "Write article on how to use Django with React",
-    completed: false,
-  }
-];
+// const todoItems = [
+//   {
+//     id: 1,
+//     title: "Go to Market",
+//     description: "Buy ingredients to prepare dinner",
+//     completed: true,
+//   },
+//   {
+//     id: 2,
+//     title: "Sutdy",
+//     description: "Read Algebra and history textbook for the upcoming test",
+//     completed: false,
+//   },
+//   {
+//     id: 3,
+//     title: "Sammy's books",
+//     description: "Go to library to return Sammy's books",
+//     completed: true,
+//   },
+//   {
+//     id: 4,
+//     title: "Article",
+//     description: "Write article on how to use Django with React",
+//     completed: false,
+//   }
+// ];
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       viewCompleted: false,
-      todoList: todoItems,
+      todoList: [],
+      modal: false,
+      activeItem: {
+        title: "",
+        description: "",
+        completed:false,
+      },
     };
+  }
+
+  componentDidMount() {
+    this.refreshList();
+  }
+
+  refreshList = () => {
+    axios
+      .get("/api/todos/")
+      .then((res) => this.setState({ todoList: res.data }))
+      .catch((err) => console.log(err));
+  };
+
+  toggle = () => {
+    this.setState({ modal: !this.state.modal});
+  };
+
+  handleSubmit = (item) => {
+    this.toggle();
+
+    if (item.id) {
+      axios
+        .put(`/api/todos/${item.id}/`, item)
+        .then((res) => this.refreshList());
+    }
+    axios
+      .post("/api/todos/", item)
+      .then((res) => this.refreshList());
+  };
+
+  handleDelete = (item) => {
+    axios
+      .delete(`/api/todos/${item.id}/`)
+      .then((res) => this.refreshList());
+  };
+
+  createItem = () => {
+    const item = { title: "", description: "", completed: false };
+    this.setState({ activeItem: item, modal: !this.state.modal });
+  };
+  
+  editItem = (item) => {
+    this.setState({ activeItem: item, modal: !this.state.modal });
   }
 
   displayCompleted = (status) => {
@@ -76,10 +129,12 @@ class App extends React.Component {
             {item.title}
           </span>
           <span>
-            <button className="btn btn-secondary me-2">
+            <button className="btn btn-secondary me-2"
+                    onClick={() => this.editItem(item)}>
               Edit
             </button>
-            <button className="btn btn-danger">
+            <button className="btn btn-danger"
+                    onClick={() => this.handleDelete(item)}>
               Delete 
             </button>
           </span>
@@ -95,7 +150,8 @@ class App extends React.Component {
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="mb-4">
-                <button className="btn btn-primary mb-2">
+                <button className="btn btn-primary mb-2"
+                        onClick={this.createItem}>
                   Add task
                 </button>
                 {this.renderTabList()}
@@ -106,6 +162,13 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        {this.state.modal ? (
+          <Modal
+            activeItem={this.state.activeItem}
+            toggle={this.toggle}
+            onSave={this.handleSubmit}
+          />
+        ) : null}
       </main>
     );
   }

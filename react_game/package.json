@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
+  "proxy": "http://localhost:8000",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development --watch"
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
+    "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "lodash": "^4.17.21",
     "react": "^17.0.2",

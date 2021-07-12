@@ -63,6 +63,8 @@ CORS_ORIGIN_WHITELIST = [
   'http://localhost:3000',
 ]
 
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
+
 ROOT_URLCONF = 'react_game.urls'
 
 TEMPLATES = [

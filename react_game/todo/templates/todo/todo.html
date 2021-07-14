@@ -4,8 +4,12 @@
 {% block title %}Todo List{% endblock title %}
 
 {% block content %}
-<h1>Welcome to the Todo List</h1>
-<div id="root"> </div>
+<div class="container">
+  <h1>Welcome to the Todo List</h1>
+  <br>
+  <p>Go <a href="{% url 'home' %}">Home</a></p>
+  <div id="root"> </div>
+</div>
 {% endblock content %}
 
 {% block scripts %}

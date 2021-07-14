@@ -2,7 +2,6 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        testApp: './assets/index.js',
         ticTacToeApp: './assets/tic_tac_toe.jsx',
         todoApp: './assets/todo.jsx'
     }, // path to our input file

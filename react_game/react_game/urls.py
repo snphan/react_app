@@ -30,4 +30,5 @@ urlpatterns = [
     path('tic-tac-toe/', include('tic_tac_toe.urls')),
     path('todo/', include('todo.urls')),
     path('api/', include(router.urls)),
+    path('accounts/', include('accounts.urls')),
 ]

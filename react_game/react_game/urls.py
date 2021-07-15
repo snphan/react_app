@@ -25,7 +25,7 @@ router.register(r'todos', TodoView, 'todo')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name="hello_webpack.html")),
+    path('', TemplateView.as_view(template_name="welcome.html"), name='home'),
     path('employee-list/', include('employee_list.urls')),
     path('tic-tac-toe/', include('tic_tac_toe.urls')),
     path('todo/', include('todo.urls')),

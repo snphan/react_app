@@ -50,6 +50,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // Runs this after the html is inserted into the tree, initialization should be 
+    // Put here.
     this.refreshList();
   }
 
@@ -71,6 +73,7 @@ class App extends React.Component {
       axios
         .put(`/api/todos/${item.id}/`, item)
         .then((res) => this.refreshList());
+      return;
     }
     axios
       .post("/api/todos/", item)
@@ -90,7 +93,7 @@ class App extends React.Component {
   
   editItem = (item) => {
     this.setState({ activeItem: item, modal: !this.state.modal });
-  }
+  };
 
   displayCompleted = (status) => {
     if (status) {
@@ -120,7 +123,6 @@ class App extends React.Component {
     const newItems = this.state.todoList.filter(
       (item) => item.completed == viewCompleted
     );
-
     return newItems.map((item) => (
       <li key={item.id}
           className="list-group-item d-flex justify-content-between align-items-center"

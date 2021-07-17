@@ -18,6 +18,15 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">
+          <div class="container">
+            {{message}}</br> 
+          </div>
+        </div> 
+      {% endfor %} 
+    {% endif %}
     <div class="container">
       <h1>Welcome to the React Apps page!</h1>
       <h3>All the apps here are written in React</h3>

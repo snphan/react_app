@@ -6,7 +6,7 @@ import Modal from "./components/Modal";
 
 axios.defaults.xsrfHeaderName = "X-CSRFToken"; // So that post requests don't get rejected
 
-
+// Dummy Data
 // const todoItems = [
 //   {
 //     id: 1,
@@ -38,6 +38,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentUser: JSON.parse(document.getElementById('user_id').text),
       viewCompleted: false,
       todoList: [],
       modal: false,
@@ -58,7 +59,10 @@ class App extends React.Component {
   refreshList = () => {
     axios
       .get("/api/todos/")
-      .then((res) => this.setState({ todoList: res.data }))
+      .then((res) => {
+        let filteredData = res.data.filter(item => item.created_by == this.state.currentUser);
+        this.setState({ todoList: filteredData })
+      })
       .catch((err) => console.log(err));
   };
 
@@ -119,7 +123,7 @@ class App extends React.Component {
   };
 
   renderItems = () => {
-    const {viewCompleted} = this.state;
+    const {currentUser, viewCompleted} = this.state;
     const newItems = this.state.todoList.filter(
       (item) => item.completed == viewCompleted
     );

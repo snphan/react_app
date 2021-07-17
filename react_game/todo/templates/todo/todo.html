@@ -4,6 +4,8 @@
 {% block title %}Todo List{% endblock title %}
 
 {% block content %}
+{{ user.id | json_script:"user_id" }}
+
 <div class="container">
   <h1>Welcome to the Todo List</h1>
   <br>

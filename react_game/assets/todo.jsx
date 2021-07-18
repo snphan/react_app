@@ -46,6 +46,7 @@ class App extends React.Component {
         title: "",
         description: "",
         completed:false,
+        created_by: JSON.parse(document.getElementById('user_id').text),
       },
     };
   }
@@ -91,7 +92,7 @@ class App extends React.Component {
   };
 
   createItem = () => {
-    const item = { title: "", description: "", completed: false };
+    const item = { title: "", description: "", completed: false, created_by: this.state.currentUser };
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
   

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'employee_list',
+    'employeelistBackend',
     'tic_tac_toe',
     'todo',
     'todoBackend',
@@ -65,6 +66,12 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
   'http://localhost:3000',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ]
+}
 
 CSRF_COOKIE_NAME = "XSRF-TOKEN"
 

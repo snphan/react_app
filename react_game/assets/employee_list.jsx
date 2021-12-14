@@ -36,27 +36,27 @@ const DUMMY_EMPLOYEES = [
 
 
 class SearchableEmployeeList extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       clickCount: 0,
     };
-  };
+  }
 
+  // You need to use arrow functions....
   handleClick() {
-    const {clickCount} = this.state
-    console.log(clickCount)
-    this.state.clickCount = clickCount + 1;
-    alert(`I was clicked ${clickCount} times!`)
-  };
+    const { clickCount } = this.state;
+    this.setState({clickCount: clickCount+1});
+  }
 
   render() {
     return (
       <div className="container">
-        <div className="d-flex justify-content-center align-items-center">
-          {this.state.clickCount}
-          <Button color="primary" onClick={this.handleClick}>Click Me!</Button>
-          
+        <div className="d-flex flex-column justify-content-center align-items-center">
+          <Button color="primary" onClick={() => this.handleClick()}>Click Me!</Button>
+          <br />
+          Clicked {this.state.clickCount} Times!
         </div>
       </div>
     );

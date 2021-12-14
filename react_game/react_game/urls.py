@@ -18,10 +18,12 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework import routers
 from todoBackend.views import TodoView
+from employeelistBackend.views import EmployeeView
 
 # Routing registration for API
 router = routers.DefaultRouter()
 router.register(r'todos', TodoView, 'todo')
+router.register(r'employees', EmployeeView, 'employee')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +32,5 @@ urlpatterns = [
     path('tic-tac-toe/', include('tic_tac_toe.urls')),
     path('todo/', include('todo.urls')),
     path('api/', include(router.urls)),
+    path('accounts/', include('accounts.urls')),
 ]

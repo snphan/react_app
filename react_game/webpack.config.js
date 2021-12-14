@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
     entry: {
         ticTacToeApp: './assets/tic_tac_toe.jsx',
+        employeeListApp: './assets/employee_list.jsx',
         todoApp: './assets/todo.jsx'
     }, // path to our input file
     output: {

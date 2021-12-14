@@ -5,6 +5,6 @@ class TodoSerializer(serializers.ModelSerializer):
   class Meta:
     # Specifies the model to work with and the fields to be converted to JSON.
     model = Todo
-    fields = ('id', 'title', 'description', 'completed')
+    fields = ('id', 'title', 'description', 'completed', 'created_by')
 
 

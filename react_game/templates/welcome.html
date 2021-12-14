@@ -18,15 +18,35 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">
+          <div class="container">
+            {{message}}</br> 
+          </div>
+        </div> 
+      {% endfor %} 
+    {% endif %}
     <div class="container">
       <h1>Welcome to the React Apps page!</h1>
       <h3>All the apps here are written in React</h3>
       <br>
       <br>
-      <div class="d-flex flex-column">
-        <a href="{% url 'todo:home' %}">The Todo App</a>
-        <a href="{% url 'tic_tac_toe:home' %}">Tic Tac Toe</a>
-      </div>
+      {% if user.is_authenticated %}
+        <div class="d-flex flex-column">
+          <a href="{% url 'todo:home' %}">The Todo App</a>
+          <a href="{% url 'tic_tac_toe:home' %}">Tic Tac Toe</a>
+          <a href="{% url 'employee_list:home' %}">Employee List</a>
+        </div>
+        <br><br>
+        <p>Currently Logged in as  <strong>{{ user.get_username }}</strong></p> 
+        <a href="{% url 'accounts:logout' %}">Logout</a>
+      {% else %}
+        <p>Please login first to access the apps!</p>
+        <br>
+        <a href="{% url 'accounts:signup' %}" class="btn btn-outline-primary">Sign Up</a>
+        <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
+      {% endif %}
     </div>
     <script src="" async defer></script>
   </body>

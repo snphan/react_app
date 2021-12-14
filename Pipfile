@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+argon2-cffi = "*"
+django-bootstrap4 = "*"
 
 [dev-packages]
 
